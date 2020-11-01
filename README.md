@@ -9,4 +9,4 @@ stack run
 
 ## Assets
 
-All assets are from [Open Game Art](opengameart.org).
+All assets are from [Open Game Art](https://opengameart.org/).
