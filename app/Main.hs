@@ -129,8 +129,8 @@ checkSpeedX gs
       then 5.0
       else speedX gs + 0.5
   | otherwise =
-    if speedX gs <= 1
-      then 1.0
+    if speedX gs <= 0
+      then 0
       else speedX gs - 0.5
 
 isCollision :: GameState -> Point -> CellType -> Bool
@@ -152,7 +152,25 @@ moveX West gs =
           '*')
     then (fst (position gs) + speedX gs * (-1), snd (position gs))
     else position gs
-moveX _ gs = position gs
+moveX _ gs =
+  if speedX gs > 0 &&
+     not
+       (isCollision
+          gs
+          ( fst (position gs) +
+            speedX gs *
+            (if heading gs == FacingWest
+               then (-1)
+               else 1)
+          , snd (position gs))
+          '*')
+    then ( fst (position gs) +
+           speedX gs *
+           (if heading gs == FacingWest
+              then (-1)
+              else 1)
+         , snd (position gs))
+    else position gs
 
 moveY :: GameState -> Point -> Point
 moveY gs pnt =
@@ -195,7 +213,7 @@ main = do
           , currentLevel = level
           , spriteCount = 0
           , heading = FacingWest
-          , speedX = 2.0
+          , speedX = 0
           , speedY = (-6)
           }
   play
