@@ -3,10 +3,10 @@
 module Main where
 
 import Graphics.Gloss
-import Graphics.Gloss.Interface.Environment
+
 import Graphics.Gloss.Interface.Pure.Game
 
-data Direction
+data MoveDirection
   = East
   | West
   | None
@@ -20,7 +20,7 @@ data Heading
 data GameState =
   GameState
     { position :: Point
-    , direction :: Direction
+    , direction :: MoveDirection
     , heading :: Heading
     , currentLevel :: Level
     , spriteCount :: Int
@@ -139,7 +139,7 @@ isCollision gs pnt checkType =
     (\((x, y), tileType) -> tileType == checkType && isHit pnt (x, y))
     (currentLevel gs)
 
-moveX :: Direction -> GameState -> Point
+moveX :: MoveDirection -> GameState -> Point
 moveX East gs =
   if not (isCollision gs (fst (position gs) + speedX gs, snd (position gs)) '*')
     then (fst (position gs) + speedX gs, snd (position gs))
