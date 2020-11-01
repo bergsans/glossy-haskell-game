@@ -2,6 +2,9 @@
 
 ![](demo.gif)
 
+## Annotated code
+Read post with [annotated code at Here be seaswines](https://herebeseaswines.net/essays/2020-11-01-making-a-small-game-with-gloss).
+
 ## Installation
 ```
 stack run
